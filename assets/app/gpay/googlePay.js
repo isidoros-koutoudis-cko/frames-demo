@@ -285,7 +285,7 @@ function getGoogleUnserviceableAddressError() {
     // @todo a merchant ID is available for a production environment after approval by Google
     // See {@link https://developers.google.com/pay/api/web/guides/test-and-deploy/integration-checklist|Integration checklist}
     merchantId: GOOGLE_MERCHANT_ID,
-    merchantName: 'Paysafe Shop'
+    merchantName: 'Checkout Shop'
     };
     
     //paymentDataRequest.callbackIntents = ["SHIPPING_ADDRESS", "SHIPPING_OPTION"];
