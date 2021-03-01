@@ -1,0 +1,76 @@
+:root {
+	--cko-faded-blue: #879ca7;
+	--cko-blue: #013a51;
+	--cko-blue-hover: #025170;
+    --cko-blue-hover-tr: #02517073;
+	--cko-green: #20c997;
+	--cko-green-hover: #27e2aa;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: HelveticaNeue, Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+.header{
+    margin-left: -100px;
+}
+.header-img{
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+    transform: perspective(400px) rotateY(-12deg);
+}
+button {
+    margin-right: 10px;
+    padding: 0 14px;
+    color: #fff;
+    height: 40px;
+    border-radius: 5px;
+    border: unset;
+    font-size: 1rem;
+    cursor: pointer;
+    outline: none;
+}
+.blue{
+    background-color: var(--cko-blue);
+}
+.green{
+    background-color: var(--cko-green);
+}
+button.blue:hover {
+    background-color: var(--cko-blue-hover);
+}
+button.green:hover {
+    background-color: var(--cko-green-hover);
+}
+button.grey:hover{
+    color: var(--cko-green-hover);
+}
+.card-container{
+    margin-top: 100px;
+}
+.card{
+    margin-bottom: 30px;
+    min-height: 280px;
+    transition: all 1s;
+
+}
+.card:hover{
+    box-shadow: 0px 0px 10px 5px var(--cko-blue-hover-tr) !important;
+    -webkit-transform: translate(0, -12px);
+    -moz-transform: translate(0, -12px);
+    -ms-transform: translate(0, -12px);
+    -o-transform: translate(0, -12px);
+    transform: translate(0, -12px);
+    z-index: 1;
+}
+.card-header{
+    color: #fff;
+    font-size: 1.3em;
+    text-align: center;
+}
+p{
+    margin-bottom: 0;
+}
