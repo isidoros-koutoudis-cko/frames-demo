@@ -32,11 +32,9 @@ var tokenizationSpecification = {
    };
 /**
  * Initialize configuration parameters
- * @param {number} account The merchant account number
  * @param {Text} currency The merchant account currency
  * @param {number} amount The amount payable
  * @param {Text} usr The SUT API Key user
- * @param {Text} passwd The SUT API Key password
  * @param {Text} env The environment to test (Live or Test)
  * @param {number} gm_id The google merchant ID
  */
@@ -48,7 +46,7 @@ function setConfigParam (usr, currency, amount, env, gm_id) {
     }else {
     tokenizationSpecification.parameters.gatewayMerchantId = usr;
     GATEWAY_MERCHANT_ID = usr;
-    GOOGLE_ENVIRONMENT = env.toLowerCase() == 'live' ? 'PRODUCTION' : 'TEST';
+    GOOGLE_ENVIRONMENT = /* env.toLowerCase() == 'live' ? 'PRODUCTION' :  */'TEST';
     CURRENCY_CODE = currency;
     GOOGLE_MERCHANT_ID = gm_id;
     // set country code based on currency
@@ -98,7 +96,7 @@ const allowedCardNetworks = ["AMEX", "DISCOVER", "INTERAC", "JCB", "MASTERCARD",
  * @todo confirm your processor supports Android device tokens for your
  * supported card networks
  */
-const allowedCardAuthMethods = ["PAN_ONLY"];//, "CRYPTOGRAM_3DS"];
+const allowedCardAuthMethods = ["PAN_ONLY", "CRYPTOGRAM_3DS"];
  
 
  
