@@ -5,7 +5,7 @@ var GOOGLE_ENVIRONMENT;
 var CURRENCY_CODE;
 var GOOGLE_MERCHANT_ID;
 var COUNTRY_CODE;
-
+ 
 /**
  * Identify your gateway and your site's gateway merchant identifier
  *
