@@ -11,92 +11,16 @@
         crossorigin="anonymous"></script>
     <title>3DS</title>
     <style>
-        *,
-        *::after,
-        *::before {
-            box-sizing: border-box
-        }
+        @charset "UTF-8";
 
-        html {
-            background-color: #FFF;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
-        }
-
-        #payment-form {
-            width: 100%;
-            margin: 0 auto
-        }
-
-        .one-liner {
-            display: flex;
-            flex-direction: column
-        }
-
-        #pay-button {
-            position: absolute;
-            right: 0;
-            top: 0;
-            border: none;
-/*             border-radius: 3px;
- */            color: #FFF;
-            font-weight: 500;
-            /* height: 40px;
-            width: 100%; */
-            background-color: #13395E;
-            box-shadow: 0 1px 3px 0 rgba(19, 57, 94, 0.4)
-        }
-
-        #pay-button:active {
-            background-color: #0B2A49;
-            box-shadow: 0 1px 3px 0 rgba(19, 57, 94, 0.4)
-        }
-
-        #pay-button:hover {
-            background-color: #15406B;
-            box-shadow: 0 2px 5px 0 rgba(19, 57, 94, 0.4)
-        }
-
-        #pay-button:disabled {
-            background-color: #697887;
-            box-shadow: none
-        }
-
-        #pay-button:not(:disabled) {
-            cursor: pointer
-        }
-
-        /*         .card-frame {
-            border: solid 1px #13395E;
-            border-radius: 3px;
-            width: 100%;
-            margin-bottom: 8px;
-            height: 40px;
-            box-shadow: 0 1px 3px 0 rgba(19, 57, 94, 0.2)
-        }
-
-        .card-frame.frame--rendered {
-            opacity: 1
-        }
-
-        .card-frame.frame--rendered.frame--focus {
-            border: solid 1px #13395E;
-            box-shadow: 0 2px 5px 0 rgba(19, 57, 94, 0.15)
-        } */
-
-        .card-frame.frame--rendered.frame--invalid {
-            border: solid 1px #D96830;
-            box-shadow: 0 2px 5px 0 rgba(217, 104, 48, 0.15)
-        }
-
-        .success-payment-message {
-            color: #13395E;
-            line-height: 1.4
-        }
-
-        .token {
-            color: #b35e14;
-            font-size: 0.9rem;
-            font-family: monospace
+        body {
+            font-size: 10px;
+            font-family: Roboto, sans-serif;
+            /* background-color: #ff7b73; */
+            margin: 0;
+            display: grid;
+            height: 100vh;
+            place-items: center;
         }
 
         .c-checkbox {
@@ -104,7 +28,7 @@
         }
 
         .c-checkbox:checked+.c-formContainer .c-form {
-            width: 100%;
+            width: 40em;
         }
 
         .c-checkbox:checked+.c-formContainer .c-form__toggle {
@@ -115,7 +39,7 @@
 
         .c-checkbox:checked+.c-formContainer .c-form__input,
         .c-checkbox:checked+.c-formContainer .c-form__buttonLabel {
-            transition: 0.2s 0.1s;
+            transition: 0.3s 0.1s;
             visibility: visible;
             opacity: 1;
             transform: scale(1);
@@ -139,8 +63,7 @@
         }
 
         .c-formContainer {
-            /*             position: relative;
- */
+            position: relative;
             font-weight: 700;
         }
 
@@ -163,6 +86,7 @@
         }
 
         .c-form__toggle {
+            background-color: #013a51;
             color: #20c997;
             top: 0;
             cursor: pointer;
@@ -170,6 +94,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+        .c-form__toggle:hover{
+            background-color: #025170;
         }
 
         .c-form__toggle::before {
@@ -207,7 +134,7 @@
         }
 
         .c-form__input:required:valid {
-            color: #ff7b73;
+            color: #013a51;
         }
 
         .c-form__input:required:valid+.c-form__buttonLabel {
@@ -219,7 +146,7 @@
         }
 
         .c-form__buttonLabel {
-            color: #20c997;
+            color: #ffffff;
             height: 100%;
             width: auto;
         }
@@ -238,48 +165,40 @@
             padding: 0;
             height: 100%;
             width: 5em;
-            background-color: #ff7b73;
+            background-color: #013a51;
         }
-        button:active, button:focus{
+        .c-form__button:hover{
+            background-color: #025170;
+        }
+        .c-form__button:disabled{
+            background-color: #697887;
+            box-shadow: none
+        }
+        .c-form__button:focus, .c-form__button:active{
             outline: none;
         }
-        .card-frame{
-            position: absolute;
-            top: 5%;
-            left: 1em;
-            width: 65%;
+        #result{
+            position: fixed;
+            bottom: 10%;
+            left: 10%;
         }
-    </style>
     </style>
 </head>
 
 <body>
-
-    <!-- add frames script -->
     <script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
-
     <input class="c-checkbox" type="checkbox" id="checkbox">
     <div class="c-formContainer">
-        <form id="payment-form" class="c-form" method="POST" action="">
-            <div class=" one-liner">
-                <div class="card-frame c-form__input">
-                </div>
-                <button id="pay-button" class="c-form__button c-form__buttonLabel" type="button" disabled>
-                    <!-- <label class="c-form__buttonLabel" for="checkbox">Pay</label> -->Pay</button>
+        <form id="payment-form" class="c-form" action="">
+            <div class="card-frame c-form__input">
             </div>
-            <label class="c-form__toggle" for="checkbox" data-title="Pay Now"></label>
+            <label class="c-form__buttonLabel" for="checkbox">
+                <button id="pay-button" class="c-form__button" disabled>Pay</button>
+            </label>
+            <label class="c-form__toggle" for="checkbox" data-title="Pay now"></label>
         </form>
+        <p id="result" class="success-payment-message"></p>
     </div>
-<!--     <form id="payment-form" method="POST" action="">
-        <div class=" one-liner">
-            <div class="card-frame">
-            </div>
-            <button id="pay-button" disabled>
-                PAY GBP 24.99
-            </button>
-        </div>
-        <p class="success-payment-message"></p>
-    </form> -->
     <script src="./app.js"></script>
 </body>
 

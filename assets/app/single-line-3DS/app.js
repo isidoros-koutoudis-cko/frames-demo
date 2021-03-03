@@ -1,5 +1,6 @@
 var payButton = document.getElementById("pay-button");
 var form = document.getElementById("payment-form");
+var el = document.querySelector(".success-payment-message");
 var redirect = "";
 var formData = new FormData();
 
@@ -17,9 +18,8 @@ Frames.addEventHandler(
 Frames.addEventHandler(
     Frames.Events.CARD_TOKENIZED,
     function (event) {
-        var el = document.querySelector(".success-payment-message");
-        el.innerHTML = "Card tokenization completed<br>" +
-            "Your card token is: <span class=\"token\">" + event.token + "</span>";
+       /*  el.innerHTML = 
+            "Your card token is: <span class=\"token\">" + event.token + "</span>"; */
     }
 );
 
@@ -44,11 +44,13 @@ form.addEventListener("submit", function (event) {
                 },
                 error: function (result) {
                     console.log(result);
+                    el.innerHTML(result.error);
                 }
             });
         Frames.init();
     })
     .catch(function (error){
         console.log(error);
+        el.innerHTML(error);
     });
 });
