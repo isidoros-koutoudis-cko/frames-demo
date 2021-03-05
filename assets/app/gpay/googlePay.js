@@ -420,11 +420,13 @@ function prefetchGooglePaymentData() {
     paymentsClient.loadPaymentData(paymentDataRequest)
     .then(function (paymentData) {
         // handle the response
+        document.getElementById("gpay_result").innerHTML = "";
         processPayment(paymentData);
     })
     .catch(function (err) {
         // show error in developer console for debugging
         console.error(err);
+        document.getElementById("gpay_result").innerHTML = err;
         //printProperties(err, "gpay.error");
     });
    }
@@ -438,6 +440,7 @@ function prefetchGooglePaymentData() {
    function processPayment(paymentData) {
     // show returned data in developer console for debugging
     console.log(paymentData);
+    document.getElementById("gpay_result").innerHTML = "Payment completed. Thank you!"
     //printMessage("Google Pay successful payment!")
     //printProperties(paymentData.paymentMethodData.tokenizationData, "gpay.response.data");
    }

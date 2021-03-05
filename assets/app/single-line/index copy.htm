@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"
+        integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG"
+        crossorigin="anonymous"></script>
+    <title>3DS</title>
+    <style>
+        @charset "UTF-8";
+
+        body {
+            font-size: 10px;
+            font-family: Roboto, sans-serif;
+            /* background-color: #ff7b73; */
+            margin: 0;
+            display: grid;
+            height: 100vh;
+            place-items: center;
+        }
+
+        .c-checkbox {
+            display: none;
+        }
+
+        .c-checkbox:checked+.c-formContainer .c-form {
+            width: 40em;
+        }
+
+        .c-checkbox:checked+.c-formContainer .c-form__toggle {
+            visibility: hidden;
+            opacity: 0;
+            transform: scale(0.7);
+        }
+
+        .c-checkbox:checked+.c-formContainer .c-form__input,
+        .c-checkbox:checked+.c-formContainer .c-form__buttonLabel {
+            transition: 0.3s 0.1s;
+            visibility: visible;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .c-checkbox:not(:checked)+.c-formContainer .c-form__input:required:valid~.c-form__toggle::before,
+        .c-checkbox:checked+.c-formContainer .c-form__input:required:valid~.c-form__toggle::before {
+            content: "Thank You!";
+        }
+
+        .c-checkbox:not(:checked)+.c-formContainer .c-form__input:required:valid~.c-form__toggle {
+            pointer-events: none;
+            cursor: default;
+        }
+
+        .c-formContainer,
+        .c-form,
+        .c-form__toggle {
+            width: 20em;
+            height: 6.25em;
+        }
+
+        .c-formContainer {
+            position: relative;
+            font-weight: 700;
+        }
+
+        .c-form,
+        .c-form__toggle {
+            position: absolute;
+            border-radius: 6.25em;
+            background-color: #ffffff;
+            transition: 0.2s;
+        }
+
+        .c-form {
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.625em;
+            box-sizing: border-box;
+            box-shadow: 0 0.125em 0.3125em rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+        }
+
+        .c-form__toggle {
+            background-color: #013a51;
+            color: #20c997;
+            top: 0;
+            cursor: pointer;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .c-form__toggle:hover{
+            background-color: #025170;
+        }
+
+        .c-form__toggle::before {
+            font-size: 1.75em;
+            content: attr(data-title);
+        }
+
+        .c-form__input,
+        .c-form__button {
+            font: inherit;
+            border: 0;
+            outline: 0;
+            border-radius: 5em;
+            box-sizing: border-box;
+        }
+
+        .c-form__input,
+        .c-form__buttonLabel {
+            font-size: 1.75em;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.7);
+            transition: 0s;
+        }
+
+        .c-form__input {
+            color: #ffcccc;
+            height: 100%;
+            width: 100%;
+            padding: 0 0.714em;
+        }
+
+        .c-form__input::placeholder {
+            color: currentColor;
+        }
+
+        .c-form__input:required:valid {
+            color: #013a51;
+        }
+
+        .c-form__input:required:valid+.c-form__buttonLabel {
+            color: #ffffff;
+        }
+
+        .c-form__input:required:valid+.c-form__buttonLabel::before {
+            pointer-events: initial;
+        }
+
+        .c-form__buttonLabel {
+            color: #ffffff;
+            height: 100%;
+            width: auto;
+        }
+
+        .c-form__buttonLabel::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            cursor: pointer;
+        }
+
+        .c-form__button {
+            color: inherit;
+            padding: 0;
+            height: 100%;
+            width: 5em;
+            background-color: #013a51;
+        }
+        .c-form__button:hover{
+            background-color: #025170;
+        }
+        .c-form__button:disabled{
+            background-color: #697887;
+            box-shadow: none
+        }
+        .c-form__button:focus, .c-form__button:active{
+            outline: none;
+        }
+        #result{
+            position: fixed;
+            bottom: 10%;
+            left: 10%;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
+    <input class="c-checkbox" type="checkbox" id="checkbox">
+    <div class="c-formContainer">
+        <form id="payment-form" class="c-form" action="">
+            <div class="card-frame c-form__input">
+            </div>
+            <label class="c-form__buttonLabel" for="checkbox">
+                <button id="pay-button" class="c-form__button" disabled>Pay</button>
+            </label>
+            <label class="c-form__toggle" for="checkbox" data-title="Pay now"></label>
+        </form>
+        <p id="result" class="success-payment-message"></p>
+    </div>
+    <script src="./app.js"></script>
+</body>
+
+</html>

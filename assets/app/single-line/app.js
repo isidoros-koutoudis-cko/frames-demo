@@ -68,8 +68,8 @@ function threeD(token) {
     },
     "capture": true,
     "payment_type": "Regular",
-    "success_url": "http://localhost:8888/assets/app/single-line-3DS/success.htm",
-    "failure_url": "http://localhost:8888/assets/app/single-line-3DS/fail.htm"
+    "success_url": "http://localhost:8888/assets/app/single-line/success.htm",
+    "failure_url": "http://localhost:8888/assets/app/single-line/fail.htm"
 };
     var requestOptions = {
         method: 'POST',

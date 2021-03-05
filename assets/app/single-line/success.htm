@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <title>Success</title>
+</head>
+<style>
+    body {
+        font-size: 1rem;
+        margin: 0;
+        display: grid;
+        height: 100vh;
+    }
+    .card-header{
+        background-color: #013a51;
+        color: #fff;
+    }
+    
+</style>
+
+<body>
+    <div>
+        <div class="card">
+            <div class="card-header">
+                Payment completed. Thank You!
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Payment Details:</h5>
+                <p class="card-text">Order # 1488299910</p>
+                <ul class="list-group list-group-flush">
+                    <li id="" class="list-group-item"><b>Order Details</b></li>
+                    <li id="ref" class="list-group-item">Reference: <span></span></li>
+                    <li id="amount" class="list-group-item">Amount: <span></span></li>
+                </ul>
+                <ul class="list-group list-group-flush">
+                    <li id="" class="list-group-item"><b>Card Details</b></li>
+                    <li id="cb" class="list-group-item">Card Brand: <span></span></li>
+                    <li id="cn" class="list-group-item">Card Number: <span></span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const session = urlParams.get('cko-session-id');
+        console.log(queryString);
+
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "sk_test_520984d1-5a3f-45df-84b0-060f650a9a81");
+        myHeaders.append("Content-Type", "application/json");
+
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        }
+
+        fetch("https://api.sandbox.checkout.com/payments/" + session, requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                console.log(result);
+                _result = JSON.parse(result);
+                console.log(_result.source.scheme);
+                document.querySelector("#ref > span").innerHTML = _result.reference;
+                document.querySelector("#amount > span").innerHTML = _result.amount + " " + _result.currency;
+                document.querySelector("#cb > span").innerHTML = _result.source.card_type + " " + _result.source.scheme;
+                document.querySelector("#cn > span").innerHTML = _result.source.bin + " xx - xxxx - " + _result.source.last4;
+            })
+    </script>
+</body>
+
+</html>
