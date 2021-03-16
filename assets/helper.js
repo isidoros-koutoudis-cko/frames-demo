@@ -30,3 +30,14 @@ var session = (
         };
     }
 )();
+
+function result () {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const session = urlParams.get('cko-session-id');
+
+    if (session) {
+        setModal('./success.htm?id=' + session);
+    }
+
+};

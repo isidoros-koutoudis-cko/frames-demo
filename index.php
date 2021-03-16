@@ -113,7 +113,13 @@
                     </div>
                 </div>
             </div>
-
+            <div class=" col-md-12">
+                <div class="shadow card ">
+                    <div class="card-body ratio">
+                      <iframe id="cof" src="./assets/app/apm/index.htm" frameborder="0" scrolling="no"></iframe>
+                   </div>
+                </div>
+            </div>
         </div>
         <!--End of Cards-->
     </div>
@@ -135,7 +141,11 @@
             if (document.readyState === 'complete') {
                 onGooglePayLoaded("pk_test_77293664-ad1b-4012-ab5d-a5aedb9b2618", "USD", "1000", "TEST", "12345678910");
             }
-        }        
+        };
+
+        window.onload = (event) => {
+            result();
+    };
     </script>
 </body>
 

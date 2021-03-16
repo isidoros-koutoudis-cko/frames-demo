@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script async src="./app.js"></script>
+    <title>Klarna</title>
+    <style>
+        @charset "UTF-8";
+
+        :root {
+            --cko-blue: #013a51;
+            --cko-blue-hover: #025170;
+        }
+
+        iframe {
+            max-width: 100% !important;
+        }
+
+        button {
+            margin-right: 10px;
+            padding: 0 14px;
+            color: #fff !important;
+            height: 40px;
+            border-radius: 5px;
+            border: unset;
+            font-size: 1rem;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .blue {
+            background-color: var(--cko-blue);
+        }
+
+        button.blue:hover {
+            background-color: var(--cko-blue-hover);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row header mb-2">
+            <img class="cko-logo" src="/assets/img/cko-logo.png" alt="checkout.com"
+                style="width: 320px; height: 100px; margin-left: 0;">
+        </div>
+        <div
+            class="row border border-3 rounded-ends position-absolute top-50 start-50 translate-middle col-md-5 p-3 card">
+            <div id="klarna_container" class="col-md-12"></div>
+            <button id="pay-button" class="btn button-primary blue" onclick="klarnaAuth()">Pay with
+                Klarna</button>
+        </div>
+
+        <script>
+            window.onload = (event) => {
+                payNow('session');
+
+                window.klarnaAsyncCallback = function (clientToken, sessionid) {
+                    try {
+                        Klarna.Payments.init(
+                            {
+                                client_token: clientToken
+                            }
+                        );
+
+                        Klarna.Payments.load(
+                            // options
+                            {
+                                container: "#klarna_container",
+                                payment_method_categories: ["pay_later"],
+                                instance_id: sessionid //"klarna-payments-instance"
+                            },
+                            {
+                                purchase_country: "GB",
+                                purchase_currency: "GBP",
+                                locale: "en-GB",
+                                billing_address: {
+                                    given_name: "John",
+                                    family_name: "Doe",
+                                    email: "johndoe@email.com",
+                                    title: "Mr",
+                                    street_address: "13 New Burlington St",
+                                    street_address2: "Apt 214",
+                                    postal_code: "W13 3BG",
+                                    city: "London",
+                                    region: "",
+                                    phone: "01895808221",
+                                    country: "GB"
+                                }
+                            },
+                            // callback
+                            function (response) {
+                                console.log(response);
+                            }
+                        );
+                    } catch (e) {
+                        // Handle error
+                        console.log(e);
+                    }
+
+                };
+            };
+        </script>
+        <script src="https://x.klarnacdn.net/kp/lib/v1/api.js" async></script>
+</body>
+
+</html>

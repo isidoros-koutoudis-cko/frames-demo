@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <title>Single Line</title>
+    <style>
+        @charset "UTF-8";
+
+        body {
+            font-size: 1rem;
+            font-family: Roboto, sans-serif;
+            /* background-color: #ff7b73; */
+            margin: 0;
+            display: grid;
+            height: 100vh;
+            place-items: center;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: white;
+        }
+
+        #pay-button {
+            border: none;
+            border-radius: 3px;
+            color: #FFF;
+            font-weight: 500;
+            height: 40px;
+            width: 100%;
+            background-color: #13395E;
+            box-shadow: 0 1px 3px 0 rgba(19, 57, 94, 0.4)
+        }
+
+        #pay-button:active {
+            background-color: #0B2A49;
+            box-shadow: 0 1px 3px 0 rgba(19, 57, 94, 0.4)
+        }
+
+        #pay-button:hover {
+            background-color: #15406B;
+            box-shadow: 0 2px 5px 0 rgba(19, 57, 94, 0.4)
+        }
+
+        #pay-button:disabled {
+            background-color: #697887;
+            box-shadow: none
+        }
+
+        #pay-button:not(:disabled) {
+            cursor: pointer
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
+    <div class="centered col-sm-5">
+        <form id="payment-form" class="" method="POST" action="https://merchant.com/charge-card">
+            <div id="payForm">
+                <div id="apm-container" class="mb-3">
+                    <div class="form-floating">
+                        <select class="form-select" id="apm-select" name="apm-id"
+                            aria-label="Floating label select example">
+                            <option id="default" value="default" selected>Select APM</option>
+                            <option id="sofort" value="sofort">Sofort</option>
+                            <option id="ideal" value="ideal">iDeal</option>
+                            <option id="klarna" value="klarna">Klarna</option>
+                            <option id="bancontact" value="bancontact">Bancontact</option>
+                            <option id="qpay" value="qpay">QPay</option>
+                            <option id="dlocal" value="dlocal">dLocal</option>
+                            <option id="boleto" value="boleto">Boleto</option>
+                            <option id="fawtry" value="fawtry">Fawry</option>
+                            <option id="multibanco" value="multibanco">Multibanco</option>
+                            <option id="oxxo" value="oxxo">OXXO</option>
+                            <option id="pago" value="pago">Pago Facil</option>
+                            <option id="rapipago" value="rapipago">Rapipago</option>
+                            <option id="viabaloto" value="viabaloto">Via Baloto</option>
+                            <option id="eps" value="eps">EPS</option>
+                            <option id="giropay" value="giropay">Giropay</option>
+                            <option id="poli" value="poli">Poli</option>
+                            <option id="przelewy" value="przelewy">Przelewy24</option>
+                        </select>
+                        <label id="cof-label" for="floatingSelect">Alternative Payments</label>
+                    </div>
+                </div>
+                <div class="mb-3 form-floating" hidden>
+                    <select class="form-select" name="options" id="options" aria-label="Floating label select example" >
+                        <option value="default" selected>Select an option</option>
+                        <option value="INGBNL2A">ING</option>
+                        <option value="RABONL2U">RABO</option>
+                    </select>
+                    <label id="cof-label" for="options" >Issuer</label>
+                </div>
+                <button id="pay-button" disabled>
+                    PAY GBP 24.99
+                </button>
+                <p class="success-payment-message"></p>
+            </div>
+
+        </form>
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+
+</html>
